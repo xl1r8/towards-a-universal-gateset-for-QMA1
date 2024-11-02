@@ -1,0 +1,5 @@
+*.png
+cmake-build-*
+build
+vcpkg_installed
+buildr

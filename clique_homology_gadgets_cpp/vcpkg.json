@@ -1,0 +1,8 @@
+{
+  "dependencies": [
+    "eigen3",
+    "gtest",
+    "spectra",
+    "suitesparse",
+  ]
+}

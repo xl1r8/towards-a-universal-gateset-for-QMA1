@@ -1,0 +1,21 @@
+{
+    "version": 2,
+    "configurePresets": [
+      {
+        "name": "debug",
+        "generator": "Ninja",
+        "binaryDir": "${sourceDir}/build",
+        "cacheVariables": {
+          "CMAKE_TOOLCHAIN_FILE": "/home/dorian/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
+        }
+      },
+      {
+        "name": "release",
+        "inherits": "debug",
+        "binaryDir": "${sourceDir}/buildr",
+        "cacheVariables": {
+          "CMAKE_BUILD_TYPE": "Release"
+        }
+      }
+    ]
+  }

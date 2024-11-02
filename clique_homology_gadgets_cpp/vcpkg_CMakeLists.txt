@@ -1,0 +1,42 @@
+cmake_minimum_required(VERSION 3.29)
+project(clique_homology_gadgets)
+
+set(CMAKE_CXX_STANDARD 20)
+
+find_package(Eigen3 CONFIG REQUIRED)
+find_package(Spectra CONFIG REQUIRED)
+
+#find_package(SuiteSparse REQUIRED COMPONENTS CHOLMOD SPQR)
+find_package(SuiteSparse CONFIG REQUIRED)
+
+
+find_package(GTest CONFIG REQUIRED)
+
+find_package(arpackng CONFIG REQUIRED)
+
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
+
+include_directories(. thirdparty/ezARPACK-1.0/include)
+
+set(SRC
+        src/simplex.cpp
+        src/graph.cpp
+        src/gadgets.cpp
+        src/homology.cpp
+        src/sparsemath.cpp
+        thirdparty/cliquer-1.21/cliquer.c
+        thirdparty/cliquer-1.21/graph.c
+        thirdparty/cliquer-1.21/reorder.c
+)
+
+SET(LIBS Eigen3::Eigen SuiteSparse::cholmod SuiteSparse::spqr Spectra::Spectra ARPACK::ARPACK)
+
+
+add_executable(clique_homology_gadgets ${SRC} src/main.cpp
+        src/eigen.h)
+target_link_libraries(clique_homology_gadgets ${LIBS})
+
+
+add_executable(clique_homology_gadgets_tests ${SRC} ${TEST_SRC} src/test.cpp)
+target_link_libraries(clique_homology_gadgets_tests ${LIBS} GTest::gtest GTest::gtest_main)
+
